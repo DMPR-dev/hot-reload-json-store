@@ -9,11 +9,26 @@ export default class Store {
   constructor (path) {
     this._path = path
     if (fs.existsSync(path)) {
-      this.Store = JSON.parse(fs.readFileSync(path, 'utf8'))
+      this._store = JSON.parse(fs.readFileSync(path, 'utf8'))
     } else {
       this._store = {}
       this._save()
     }
+
+    this.hotReload();
+  }
+
+  hotReload() {
+    fs.watchFile( this._path, {
+		bigint: false,
+		persistent: true,
+		interval: 4000,
+	  }, () => {
+		const contents = fs.readFileSync(this._path, 'utf8');
+      if( contents ) {
+        this._store = JSON.parse(fs.readFileSync(this._path, 'utf8'));
+      }
+    });
   }
 
   get (key) {
