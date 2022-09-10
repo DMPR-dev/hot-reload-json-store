@@ -1,11 +1,11 @@
-const fs = require( 'fs' );
+import fs from 'fs'
 
 const clone = data => {
   // JSON.parse(undefined) throws an error, so handle it explicitly
   return data === undefined ? undefined : JSON.parse(JSON.stringify(data))
 }
 
-class Store {
+export default class Store {
   constructor (path) {
     this._path = path
     if (fs.existsSync(path)) {
@@ -49,5 +49,3 @@ class Store {
     fs.writeFileSync(this._path, JSON.stringify(this._store))
   }
 }
-
-module.exports = Store;
