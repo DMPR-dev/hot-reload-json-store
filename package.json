@@ -1,7 +1,7 @@
 {
-  "name": "json-store",
+  "name": "json-store-hot-reload",
   "version": "1.0.0",
-  "description": "Simple json db for node with hot reload",
+  "description": "Simple json db for node with a hot reload",
   "main": "index.js",
   "type": "module",
   "scripts": {
